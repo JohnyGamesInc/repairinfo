@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Management page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div style="display: inline-flex">
+        <div>
+            <p th:if="${message} != null" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                <span th:text="${message}"/>
+            </p>
+            <article class="card-body">
+                <form th:action="@{/upload}" th:object="${file}" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>File to upload</label>
+                            <input type="file" name="file" class="form-control-file" accept="/*" size="1048576000"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" name="uploadFile" class="btn btn-success btn-block">Upload</button>
+                    </div>
+                </form>
+                <div>
+                    <a th:href="@{/delete}" name="deleteAll" class="btn btn-danger btn-block">Delete All</a>
+                </div>
+                <hr>
+                <div>
+                    <a th:href="@{/info}" name="deleteAll" class="btn btn-info btn-block">Data Info</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

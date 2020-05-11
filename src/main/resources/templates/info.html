@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Data Info</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="container bgcont center-block" style="display:inline-flex;">
+        <h1 class="page-header">Data Info</h1>
+    </div>
+
+    <div style="display: inline-flex">
+        <div>
+            <div>
+                <a th:href="@{/info(all='true')}" th:name="all" type="boolean" th:value="true" class="btn btn-primary btn-block">Display All</a>
+            </div>
+            <hr>
+            <div>
+                <a th:href="@{/info(all='false', t3cause='true')}" th:name="t3cause" type="boolean" th:value="true" class="btn btn-warning btn-block">Top 3 Causes</a>
+            </div>
+            <hr>
+            <div>
+                <a th:href="@{/info(all='false', t3fixTime='true')}" th:name="t3fixTime" type="boolean" th:value="true" class="btn btn-warning btn-block">Top 3 Longest Fix Time</a>
+            </div>
+            <hr>
+            <div>
+                <a th:href="@{/info(all='false', repeated='true')}" th:name="repeated" type="boolean" th:value="true" class="btn btn-danger btn-block">Repeated Fixes</a>
+            </div>
+            <hr>
+            <div>
+                <a th:href="@{/}" name="repeatedFixes" class="btn secondary-label btn-block">Back to Upload</a>
+            </div>
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th style="visibility: hidden">ID</th>
+                    <th>Case ID</th>
+                    <th>ATM ID</th>
+                    <th>Cause</th>
+                    <th>Start</th>
+                    <th>Finish</th>
+                    <th>Serial</th>
+                    <th>Bank NM</th>
+                    <th>Channel</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody th:if="${!cases.isEmpty()}">
+                <tr th:each="case : ${cases}">
+                    <td style="visibility: hidden" th:text="${case.id}"/>
+                    <td th:text="${case.caseId}"/></td>
+                    <td th:text="${case.atmId}"/>
+                    <td th:text="${case.caseDescription}"/>
+                    <td th:text="${#temporals.format(case.start, 'dd.MM.yyyy HH:mm:ss')}"/>
+                    <td th:text="${#temporals.format(case.finish, 'dd.MM.yyyy HH:mm:ss')}"/>
+                    <td th:text="${case.serial}"/>
+                    <td th:text="${case.bankNM}"/>
+                    <td th:text="${case.channel}"/>
+                    <td>
+                        <button type="submit" name="editRecord" class="btn btn-warning btn-block">Edit</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
